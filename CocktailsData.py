@@ -1,6 +1,12 @@
-import requests
+import requests, json
 
-users = requests.get('https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=11007')
+ingredientOptions = requests.get('https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list')
+print(ingredientOptions)
 
-print(users.text)
-print('Status Code', users.status_code)
+ingredient = 'Gin'
+
+data = requests.get('https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=' + ingredient)
+jsonData = json.loads(data.text)
+
+print('Status Code', data.status_code)
+print(jsonData)
