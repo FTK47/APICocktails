@@ -30,17 +30,36 @@ def search(ingredients):
     results = []
     possibleDrinks = []
     for ingredient in ingredients:
-        results.append(getByIngredient(ingredient)) #Kalder getByIngredient() for hver ingrediens, og indsætter hver liste i listen results
-    pprint.pprint(results)
-    for result in results:
-        print(len(result))
+        results.append(getByIngredient(ingredient)) #Kalder getByIngredient() for hver ingrediens, og indsætter hver liste med coktail id'er i listen results
+    #pprint.pprint(results)
+    #for result in results:
+        #print(len(result))
     countDict = findDuplicates(results)
-    pprint.pprint(countDict)
-    topscore = max(countDict.values())
+    #pprint.pprint(countDict)5
+    for id in countDict:
+        if countDict[id] > 1:
+            if getById(id)[0]['strIngredient' + str(countDict[id] + 1)] == None:
+                possibleDrinks.append(id)
+    #print(possibleDrinks)
+    for id in possibleDrinks:
+        drinkId = getById(id)
+        print(drinkId[0]['strDrink'])
+        print(drinkId[0]['strDrinkThumb'])
+        print(drinkId[0]['strAlcoholic'])
+        print(drinkId[0]['strIngredient1'] + ': ' + drinkId[0]['strMeasure1'])
+        print(drinkId[0]['strIngredient2'] + ': ' + drinkId[0]['strMeasure2'])
+        x = [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+        for number in x:
+            if drinkId[0]['strIngredient' + str(number)] != None:
+                print(drinkId[0]['strIngredient' + str(number)] + ': ' + drinkId[0]['strMeasure' + str(number)])
+        print(drinkId[0]['strInstructions'])
+        print(' ')
+
+    """topscore = max(countDict.values())
     print(topscore)
     for id in countDict:
         if countDict[id] == topscore:
-            print(getById(id))
+            print(getById(id))"""
 
 
 
@@ -69,12 +88,6 @@ def search(ingredients):
         return noResults
     """
 
-print(search(['Vodka', 'Gin']))
-#print(getById('11007'))
-#print(getByIngredient('Vermouth'))
-#print(getByIngredient('Gin'))
-#print('Status Code', data.status_code)
-#print(jsonData)
-#{'strDrink': 'Addison', 'strDrinkThumb': 'https://www.thecocktaildb.com/images/media/drink/yzva7x1504820300.jpg', 'idDrink': '17228'}
+search(['Beer', 'Jack Daniels', 'Amaretto', 'Coffee', 'Root Beer', 'Coca-Cola', 'Lemonade', '7-Up', 'Creme de Cassis', 'Lemon', 'Vodka'])
 
-#Målet er at brugeren skal kunne skrive alle de ingredienser de har ind, og så få alle de cocktails de kan lave med disse ingredienser. 
+#Målet er at brugeren skal kunne skrive alle de ingredienser de har ind, og så få alle de cocktails de kan lave med disse ingredienser.
