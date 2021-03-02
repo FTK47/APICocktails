@@ -30,12 +30,12 @@ def search(ingredients):
     results = []
     possibleDrinks = []
     for ingredient in ingredients:
-        results.append(getByIngredient(ingredient)) #Kalder getByIngredient() for hver ingrediens, og indsætter hver liste med coktail id'er i listen results
+        results.append(getByIngredient(ingredient)) #Kalder getByIngredient() for hver ingrediens, og indsætter hver liste med cocktail id'er i listen results
     #pprint.pprint(results)
     #for result in results:
         #print(len(result))
     countDict = findDuplicates(results)
-    #pprint.pprint(countDict)5
+    #pprint.pprint(countDict)
     for id in countDict:
         if countDict[id] > 1:
             if getById(id)[0]['strIngredient' + str(countDict[id] + 1)] == None:
@@ -61,33 +61,6 @@ def search(ingredients):
         if countDict[id] == topscore:
             print(getById(id))"""
 
-
-
-    """
-    for list in results:
-        for cocktail in list:
-            x = 1
-            possibleDrink = True
-            while x < 15:
-                aCocktail = getById(cocktail['idDrink'])
-                if aCocktail[0]['strIngredient' + str(x)] == None:
-                    if possibleDrink == True:
-                        possibleDrinks.append(cocktail['idDrink'])
-                        x = 20
-                    else:
-                        x = 20
-                elif aCocktail[0]['strIngredient' + str(x)] not in ingredients:
-                    possibleDrink = False
-                    x += 1
-                else:
-                    x += 1
-    noResults = "No cocktails using these ingredients could be found."
-    if len(possibleDrinks) > 0:
-        return possibleDrinks
-    else:
-        return noResults
-    """
-
-search(['Beer', 'Jack Daniels', 'Amaretto', 'Coffee', 'Root Beer', 'Coca-Cola', 'Lemonade', '7-Up', 'Creme de Cassis', 'Lemon', 'Vodka'])
+search(['Tequila', 'Triple sec', 'Lime juice', 'Salt', 'Beer', 'Vodka', 'Gin', 'Root Beer'])
 
 #Målet er at brugeren skal kunne skrive alle de ingredienser de har ind, og så få alle de cocktails de kan lave med disse ingredienser.
