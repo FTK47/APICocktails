@@ -1,4 +1,4 @@
-import requests, json, pprint
+import requests, json
 
 def getById(idDrink):
     data = requests.get('https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=' + idDrink)
@@ -31,7 +31,6 @@ def search(ingredients):
     possibleDrinks = []
     for ingredient in ingredients:
         results.append(getByIngredient(ingredient)) #Kalder getByIngredient() for hver ingrediens, og indsætter hver liste med cocktail id'er i listen results
-    #pprint.pprint(results)
     IngNummer = 1
     for result in results:
         #print(len(result))
@@ -39,32 +38,39 @@ def search(ingredients):
             print("Ingrediens " + str(IngNummer) + " er ikke i databasen.")
         IngNummer += 1
     countDict = findDuplicates(results)
-    #pprint.pprint(countDict)
     for id in countDict:
         if countDict[id] > 1:
             if getById(id)[0]['strIngredient' + str(countDict[id] + 1)] == None:
                 possibleDrinks.append(id)
-    #print(possibleDrinks)
-    for id in possibleDrinks:
-        drinkId = getById(id)
-        print(drinkId[0]['strDrink'])
-        print(drinkId[0]['strDrinkThumb'])
-        print(drinkId[0]['strAlcoholic'])
-        print(drinkId[0]['strIngredient1'] + ': ' + drinkId[0]['strMeasure1'])
-        print(drinkId[0]['strIngredient2'] + ': ' + drinkId[0]['strMeasure2'])
-        x = [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
-        for number in x:
-            if drinkId[0]['strIngredient' + str(number)] != None:
-                print(drinkId[0]['strIngredient' + str(number)] + ': ' + drinkId[0]['strMeasure' + str(number)])
-        print(drinkId[0]['strInstructions'])
-        print(' ')
+    showCocktails(possibleDrinks)
 
-    """topscore = max(countDict.values())
-    print(topscore)
-    for id in countDict:
-        if countDict[id] == topscore:
-            print(getById(id))"""
+def showCocktails(possibleDrinks):
+    if len(possibleDrinks) == 0:
+        print('No suitable cocktails found.')
+    else:
+        for id in possibleDrinks:
+            drinkId = getById(id)
+            print(drinkId[0]['strDrink'])
+            print(drinkId[0]['strDrinkThumb'])
+            print(drinkId[0]['strAlcoholic'])
+            print(drinkId[0]['strIngredient1'] + ': ' + drinkId[0]['strMeasure1'])
+            print(drinkId[0]['strIngredient2'] + ': ' + drinkId[0]['strMeasure2'])
+            x = [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+            for number in x:
+                if drinkId[0]['strIngredient' + str(number)] != None:
+                    print(drinkId[0]['strIngredient' + str(number)] + ': ' + drinkId[0]['strMeasure' + str(number)])
+            print(drinkId[0]['strInstructions'])
+            print(' ')
 
-search(['Tequila', 'Triple sec', 'Lime juice', 'Salt', 'Beer', 'Vodka', 'Gin', 'Root Beer', 'g'])
+print('Please write in all the ingredients you have availabe, one at a time. Press enter without writing anything when you are done.')
+ingredients = []
+done = 'No'
+while done == 'No':
+    x = input('Write here: ')
+    if len(x) > 0:
+        ingredients.append(x)
+    else:
+        search(ingredients)
+        done = 'Yes'
 
-#Målet er at brugeren skal kunne skrive alle de ingredienser de har ind, og så få alle de cocktails de kan lave med disse ingredienser.
+#search(['Tequila', 'Triple sec', 'g', 'Lime juice', 'Salt', 'Beer', 'Vodka', 'Gin', 'Root Beer'])
