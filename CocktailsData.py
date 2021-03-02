@@ -32,8 +32,12 @@ def search(ingredients):
     for ingredient in ingredients:
         results.append(getByIngredient(ingredient)) #Kalder getByIngredient() for hver ingrediens, og indsætter hver liste med cocktail id'er i listen results
     #pprint.pprint(results)
-    #for result in results:
+    IngNummer = 1
+    for result in results:
         #print(len(result))
+        if len(result) == 0:
+            print("Ingrediens " + str(IngNummer) + " er ikke i databasen.")
+        IngNummer += 1
     countDict = findDuplicates(results)
     #pprint.pprint(countDict)
     for id in countDict:
@@ -61,6 +65,6 @@ def search(ingredients):
         if countDict[id] == topscore:
             print(getById(id))"""
 
-search(['Tequila', 'Triple sec', 'Lime juice', 'Salt', 'Beer', 'Vodka', 'Gin', 'Root Beer'])
+search(['Tequila', 'Triple sec', 'Lime juice', 'Salt', 'Beer', 'Vodka', 'Gin', 'Root Beer', 'g'])
 
 #Målet er at brugeren skal kunne skrive alle de ingredienser de har ind, og så få alle de cocktails de kan lave med disse ingredienser.
