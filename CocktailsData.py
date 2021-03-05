@@ -58,6 +58,8 @@ def showCocktails(possibleDrinks):
             for number in x:
                 if drinkId[0]['strIngredient' + str(number)] != None:
                     print(drinkId[0]['strIngredient' + str(number)] + ': ' + drinkId[0]['strMeasure' + str(number)])
+                else:
+                    break
             print(drinkId[0]['strInstructions'])
 
 def run():
