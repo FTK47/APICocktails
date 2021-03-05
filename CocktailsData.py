@@ -33,14 +33,13 @@ def search(ingredients):
         results.append(getByIngredient(ingredient)) #Kalder getByIngredient() for hver ingrediens, og indsætter hver liste med cocktail id'er i listen results
     IngNummer = 1
     for result in results:
-        #print(len(result))
-        if len(result) == 0:
+        if len(result) == 0: #Checker om listen for ingrediensen er tom, hvilket ville betyde at ingrediensen ikke indgår i en eneste af databasens cocktails
             print("Ingrediens " + str(IngNummer) + " er ikke i databasen.")
         IngNummer += 1
-    countDict = findDuplicates(results)
+    countDict = findDuplicates(results) #Find ud af hvor mange gange hver cocktail går igen i ingredienslisterne
     for id in countDict:
-        if countDict[id] > 1:
-            if getById(id)[0]['strIngredient' + str(countDict[id] + 1)] == None:
+        if countDict[id] > 1: #Hver cocktail skal matche mindst to ingredienser for at det kan være muligt at den kan laves uden andre
+            if getById(id)[0]['strIngredient' + str(countDict[id] + 1)] == None: #Hvis cocktailen har flere ingredienser end den matcher, er der ingredienser brugeren mangler
                 possibleDrinks.append(id)
     showCocktails(possibleDrinks)
 
@@ -71,5 +70,3 @@ while done == 'No':
     else:
         search(ingredients)
         done = 'Yes'
-
-#search(['Tequila', 'Triple sec', 'g', 'Lime juice', 'Salt', 'Beer', 'Vodka', 'Gin', 'Root Beer'])
