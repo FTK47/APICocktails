@@ -34,7 +34,7 @@ def search(ingredients):
     IngNummer = 1
     for result in results:
         if len(result) == 0: #Checker om listen for ingrediensen er tom, hvilket ville betyde at ingrediensen ikke indgår i en eneste af databasens cocktails
-            print("Ingrediens " + str(IngNummer) + " er ikke i databasen.")
+            print("Ingredient " + str(IngNummer) + " is not in the database.")
         IngNummer += 1
     countDict = findDuplicates(results) #Find ud af hvor mange gange hver cocktail går igen i ingredienslisterne
     for id in countDict:
@@ -63,7 +63,7 @@ def showCocktails(possibleDrinks):
             print(drinkId[0]['strInstructions'])
 
 def run():
-    print('Please write in all the ingredients you have availabe, one at a time. Press enter without writing anything when you are done.')
+    print('Please write in all the ingredients you have available, one at a time. Press enter without writing anything when you are done.')
     ingredients = []
     done = 'No'
     while done == 'No':
