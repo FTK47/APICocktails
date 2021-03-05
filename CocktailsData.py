@@ -60,13 +60,16 @@ def showCocktails(possibleDrinks):
                     print(drinkId[0]['strIngredient' + str(number)] + ': ' + drinkId[0]['strMeasure' + str(number)])
             print(drinkId[0]['strInstructions'])
 
-print('Please write in all the ingredients you have availabe, one at a time. Press enter without writing anything when you are done.')
-ingredients = []
-done = 'No'
-while done == 'No':
-    x = input('Write here: ')
-    if len(x) > 0:
-        ingredients.append(x)
-    else:
-        search(ingredients)
-        done = 'Yes'
+def run():
+    print('Please write in all the ingredients you have availabe, one at a time. Press enter without writing anything when you are done.')
+    ingredients = []
+    done = 'No'
+    while done == 'No':
+        x = input('Write here: ')
+        if len(x) > 0:
+            ingredients.append(x)
+        else:
+            search(ingredients)
+            done = 'Yes'
+
+run()
