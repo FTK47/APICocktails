@@ -50,8 +50,8 @@ def showCocktails(possibleDrinks):
     else:
         for id in possibleDrinks:
             drinkId = getById(id)
+            print(' ')
             print(drinkId[0]['strDrink'])
-            print(drinkId[0]['strDrinkThumb'])
             print(drinkId[0]['strAlcoholic'])
             print(drinkId[0]['strIngredient1'] + ': ' + drinkId[0]['strMeasure1'])
             print(drinkId[0]['strIngredient2'] + ': ' + drinkId[0]['strMeasure2'])
@@ -60,7 +60,6 @@ def showCocktails(possibleDrinks):
                 if drinkId[0]['strIngredient' + str(number)] != None:
                     print(drinkId[0]['strIngredient' + str(number)] + ': ' + drinkId[0]['strMeasure' + str(number)])
             print(drinkId[0]['strInstructions'])
-            print(' ')
 
 print('Please write in all the ingredients you have availabe, one at a time. Press enter without writing anything when you are done.')
 ingredients = []
