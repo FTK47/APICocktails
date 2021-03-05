@@ -63,7 +63,7 @@ def showCocktails(possibleDrinks):
             print(drinkId[0]['strInstructions'])
 
 def run():
-    print('Please write in all the ingredients you have availabe, one at a time. Press enter without writing anything when you are done.')
+    print('Please write in all the ingredients you have available, one at a time. Press enter without writing anything when you are done.')
     ingredients = []
     done = 'No'
     while done == 'No':
